@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="eng">
+<head>
+        
+    <!-- Required meta tag -->
+    <meta charset="utf-8">
+    <meta="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Bootstrap CSS -->
+    <link th:rel="stylesheet"
+    th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css}"/>
+    
+    <!-- Bootstrap icons -->
+    <link href="https://icons.getbootstrap.com/"/>  
+        
+    <title>ADD PIZZA</title>
+        
+</head>
+<body>
+    <div class="container mx-auto">
+        <h1>Crea la tua nuova pizza</h1>
+        
+        <form id="form-pizza" 
+              th:action="@{/pizzeria/create}" 
+              th:object="${pizza}"
+              method="post">
+          
+              <div class="mb-3">
+                <label for="nome" 
+                    class="form-label">Nome pizza</label>
+                    
+                <input type="text" class="form-control" 
+                    th:field="*{nome}"
+                    id="nome" 
+                    placeholder="inserisci nome pizza">
+              </div>
+              
+              <div class="mb-3">
+                <label for="descrizione" 
+                    class="form-label">Descrizione pizza</label>
+                <textarea class="form-control" 
+                    th:field="*{descrizione}"
+                    id="descrizione" rows="3"></textarea>
+              </div>
+              
+              <div class="mb-3">
+                 <label for="prezzo" 
+                     class="form-label">Prezzo pizza</label>
+                                  
+                 <input type="number" class="form-control" 
+                    th:field="*{prezzo}" 
+                    id="prezzo" 
+                    placeholder="inserisci prezzo pizza">
+               </div>
+               
+               <div class="mb-3">
+                 <label for="formFile" class="form-label">Default file input example</label>
+                 <input class="form-control" type="file" id="formFile">
+               </div>
+               
+               <div th:if="${#fields.hasAnyErrors()}">
+                <ul>
+                    <li th:each="err : ${#fields.allErrors()}" th:text="${err}">
+                        Errore
+                    </li>
+                    
+                </ul>
+
+               </div>
+              
+              <div class="col-auto">
+                  <button type="submit" 
+                  class="btn btn-primary mb-3">Salva</button>
+                </div>
+          
+          
+          </form>
+
+    </div>
+    
+    <script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>    
